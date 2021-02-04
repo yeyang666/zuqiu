@@ -1,0 +1,123 @@
+{layout name="Common/index" /}
+
+<div id="dcMain">
+    <div class="mainBox imgModule">
+        <h3><span class="actionBtn" style="margin-left: 10px; cursor: pointer;" onclick="goback();">返回</span>编辑文章</h3>
+        <form id="form"  class="layui-form" action="{:url('admin/article/view')}" method="post" >
+            <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+                <tr>
+                    <td class="label" align="right">文章名称：</td>
+                    <td>
+                        <input type="text" name="title"  size="50" class="title" value="{$info.title|default=''}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">图片：</td>
+                    <td>
+                        <img id="thumbnail_img" src="{$pic|default=$moren}" name="pic" style="width:150px;height:130px;float:left;" >
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right"></td>
+                    <td>
+                        <a class="btn" href="javascript:void(0);" style="position: relative; overflow: hidden; direction: ltr;float:left;">
+                            上传图片<input id="thumbnail" type="file" name="thumbnail" style="position: absolute; right: 0px; top: 0px; font-family: Arial; font-size: 118px; margin: 0px; padding: 0px; cursor: pointer; opacity: 0;" /></a>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label" align="right">文章内容：</td>
+                    <td>
+                        <textarea id="editor" name="info" style="width:700px;height:400px;">{$info.info|default=''}</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="131"></td>
+                    <td>
+                        <input type="hidden" value="{$_GET['id']|default=''}" name="id">
+                        <input name="button" class="btn sub" type="submit" value="提交" onclick="submitForm()" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <div class="line"></div>
+    </div>
+    <div class="clear"></div>
+</div>
+<script>
+    var ue = UE.getEditor('editor');
+        $(function(){
+        $("#thumbnail").live('change',function(){
+            ajaxThumbnailUpload();
+        });
+    });
+
+        function ajaxThumbnailUpload(){
+        var path = '';
+        $.ajaxFileUpload
+        (
+    {
+        url: "{:url('adminApi/common/upload_img')}",
+        fileElementId:'thumbnail',
+        dataType: 'json',
+        success: function (data)
+        {
+            if(data.code != 1)
+        {
+            alert(data.mag);
+        }else
+        {
+            $("#thumbnail_img").attr("src", path + data.msg);
+        }
+
+        },
+            error: function (data, status, e)
+        {
+            alert(e);
+        }
+    }
+        )
+        return false;
+    }
+
+
+
+
+
+
+
+</script>
+<script>
+    function goback(){
+        history.go(-1);
+    }
+    var loading=0;
+    function submitForm(){
+        if(loading){
+            return false;
+        }
+        $('#form').ajaxForm({
+            beforeSubmit:  checkForm,// pre-submit callback
+            success:       complete,// post-submit callback
+            dataType: 'json'
+        });
+        loading=1;
+        function checkForm(){
+        }
+        function complete(d){
+            if (d.error == ""){
+                myalert('更新成功','');
+            }else{
+                alert(d.error);
+                loading=0;
+            }
+        }
+    }
+</script>
+<!--上传主图-->
+<!---->
+</body>
+</html>

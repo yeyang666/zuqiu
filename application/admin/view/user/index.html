@@ -1,0 +1,119 @@
+{layout name="Common/index" /}
+<div id="dcMain"> <!-- 当前位置 -->
+
+    <div class="mainBox imgModule">
+
+        <h3>用户列表</h3>
+
+        <table width="100%" border="0" cellpadding="10" cellspacing="0" class="tableBasic">
+
+            <tr>
+                <th>id</th>
+
+                <th>昵称</th>
+
+                <th>头像</th>
+
+                <th>性别</th>
+
+                <th>区域</th>
+                <th>手机号码</th>
+                <th>openid</th>
+
+                <th>创建时间</th>
+
+            </tr>
+
+            {volist name="list" id="vo"}
+                <tr class="tron">
+                    <td style="text-align: center;">
+                        {$vo.id}
+                    </td>
+                    <td style="text-align: center;">
+                        {$vo.nickname}
+                    </td>
+                    <td style="text-align: center;">
+
+                        <img src="{$vo.headimgurl}" style="width:50px;">
+
+                    </td>
+
+
+
+                    <td style="text-align: center;">
+
+                        <?php
+
+					if($vo['sex'] == 1){
+
+						echo '男';
+
+					}else{
+
+						echo '女';
+
+					}
+
+				?>
+
+                    </td>
+
+
+
+                    <td style="text-align: center;">
+
+                        {$vo.country}-{$vo.province}-{$vo.city}
+
+                    </td>
+
+                    <td style="text-align: center;">
+
+                        {$vo.tel}
+
+                    </td>
+
+
+                    <td style="text-align: center;">
+
+                        {$vo.openid}
+
+                    </td>
+
+
+
+                    <td style="text-align: center;">
+
+                        {$vo.createtime}
+
+                    </td>
+
+                </tr>
+
+            {/volist}
+
+        </table>
+        <div class="pager" style="float:right">{$page|raw}</div>
+
+
+
+    </div>
+
+</div>
+
+<div class="clear"></div>
+
+<div id="footer">
+
+    <div class="line"></div>
+
+</div>
+
+</div>
+
+<div class="clear"></div> </div>
+
+</body>
+
+</html>
+
+
