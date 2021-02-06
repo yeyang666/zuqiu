@@ -10,7 +10,12 @@
 
  <meta name="Copyright" content="Douco Design." />
  <link rel="stylesheet" href="__PUBLIC__/css/bootstrap.css">
- <link href="__PUBLIC__/Admin/styles/public.css" rel="stylesheet" type="text/css">
+    <script src="//vuejs.org/js/vue.min.js"></script>
+    <!-- import stylesheet -->
+    <link rel="stylesheet" href="//unpkg.com/view-design/dist/styles/iview.css">
+    <!-- import iView -->
+    <script src="//unpkg.com/view-design/dist/iview.min.js"></script>
+
 
  <script type="text/javascript" src="__PUBLIC__/Admin/js/jquery-1.8.2.min.js"></script>
 
@@ -20,217 +25,17 @@
 
  <link rel="stylesheet" href="__PUBLIC__/Admin/styles/jquery-ui.css">
 
- <script src="__PUBLIC__/Admin/js/jquery-ui.js"></script>
-
- <script src="__PUBLIC__/js/jquery.datetimepicker.js"></script>
- <link href="__PUBLIC__/js/jquery.datetimepicker.css" rel="stylesheet" type="text/css">
  <script src="__PUBLIC__/Ueditor/ueditor.config.js"></script>
  <script src="__PUBLIC__/Ueditor/ueditor.all.js"></script>
+
  <link rel="stylesheet" href="__PUBLIC__/Admin/layui/css/layui.css">
  <script src="__PUBLIC__/Admin/layui/layui.js"></script>
+
+
  <script type="text/javascript" src="__PUBLIC__/Admin/js/ajaxfileupload.js"></script>
- <script type="text/javascript">
-
-     window.UEDITOR_CONFIG.initialFrameHeight = 400;
-
-     window.UEDITOR_CONFIG.initialFrameWidth = 800;
-
-     window.UEDITOR_CONFIG.savePath='upload1';
-
- </script>
-
- <?php
-      function myselect($value1,$value2){
-      if($value1 == $value2){
-            echo 'selected="selected"';
-           }
-      }
-?>
-
-
-
- <?php
-
-       function mychecked($value1,$value2){
-
-       if($value1 == $value2){
-
-             echo 'checked';
-
-            }
-
-       }
-
-?>
-
-
-
- <style type="text/css">
-
-  ::-webkit-scrollbar {
-
-   width: 6px;
-
-   height: 6px;
-
-  }
-
-  ::-webkit-scrollbar-thumb {
-
-   border-radius: 3px;
-
-   -moz-border-radius: 3px;
-
-   -webkit-border-radius: 3px;
-
-   background-color: #c3c3c3;
-
-  }
-
-  ::-webkit-scrollbar-track {
-
-   background-color: transparent;
-
-  }
-
-
-
-
-
-
-
-
-.index_dl1{
-   display:none;
-}
-
-
-
-
-  em{
-
-   margin-top:5px
-
-  }
-
-  td{
-
-   text-align: center;
-
-   font-size:14px;
-
-  }
-
-  #search{
-
-   border:1px solid #00a2d4;padding:5px;width:250px;
-
-  }
-
-  .layui-form-selected dl{
-
-   z-index:9999;
-
-  }
-
-  #sousuo{
-
-   margin-left:5px;padding:5px 15px;text-align:center;cursor:pointer;color:#fff;background: #0065B0;
-
-  }
-
-  input{
-
-   float: left;
-
-   padding:10px;
-
-   margin-top:10px;
-
-   border: 1px solid #ccc;
-
-  }
-
-  .div_radio{
-
-   margin:0;display:none;
-
-  }
-
-
-
-
-
-.layui-btn-xs{
-
-   height: 32px !important;
-
-   line-height: 22px;
-
-   padding: 5px 10px !important;
-
-}
-
-  table
-
-  {
-
-   border-collapse:separate !important;
-
-  }
-
-  .layui-form-checked{
-
-      float:left;
-
-  }
-
-  .layui-form-checkbox[lay-skin=primary]{
-
-   float:left;
-
-  }
-
-  .actionBtn{
-
-    margin-right:20px;
-
-  }
-
-  .icon_class{
-
-   padding:0 15px;float:left;margin-top:13px;font-size:18px;color:rgba(255, 255, 255, 0.7)
-
-  }
-
-  .icon_class:hover{
-
-   padding:0 15px;float:left;margin-top:13px;font-size:18px;color:#FFC125;
-
-  }
-
-
-
-  #dcHead{
-
-   position:fixed;
-
-   top:0;
-
-   left:0;
-
-   background:#fff;
-
-  }
-
- </style>
-
-
-
-
-
+<link href="__PUBLIC__/Admin/styles/public.css" rel="stylesheet" type="text/css">
+ <script src="__PUBLIC__/Admin/js/common.js"></script>
 </head>
-
 <body style="height:100%">
 
 <div id="dcWrap"> <div id="dcHead">
@@ -255,9 +60,7 @@
 
     </li>
 
-    <li class="noRight" style="margin-right:30px;"><a href="{:url('adminApi/index/loginOut')}"><i class="layui-icon" style="
-
-width: 30px; height: 30px; float: right; margin-top: 15px; background: url() no-repeat; background-size: 100%; "></i>&nbsp;退出</a></li>
+    <li class="noRight"><a href="{:url('adminApi/index/loginOut')}"><i class="layui-icon layui-index-menu"></i>&nbsp;退出</a></li>
 
    </ul>
 
@@ -268,11 +71,9 @@ width: 30px; height: 30px; float: right; margin-top: 15px; background: url() no-
 </div>
 
 
-  <div id="dcLeft" style="height:100%; overflow:hidden; position:fixed;overflow-y:auto;top:0;background: #24303c;left:0">
+  <div id="dcLeft">
 
   <div id="menu">
-
-
 
   <ul class="top">
 
@@ -281,292 +82,15 @@ width: 30px; height: 30px; float: right; margin-top: 15px; background: url() no-
   </ul>
 
   <ul id="menudiv">
-
-   <?php
-    $adminid = session('userid');
-    $user = db('admin')->where(array('id'=>$adminid))->find();
-    $auth = db('author')->where(array('id'=>$user['authid']))->find();
-
-    $menu = changeArr($auth['functioninfo']);
-
-   ?>
-
    {volist name="menu" id="vo"}
-
     <li id="{$vo['funid']}" show="{$vo['funid']}" class=""><i class="icon_class  layui-icon {$vo['iconPicker']}" ></i><a href="{$vo['linkinfo']}"><em>{$vo['title']}</em></a></li>
-
    {/volist}
-
   </ul>
-
  </div>
-
  </div>
-
  {__CONTENT__}
-
 </div>
 
-
-
-
-
-
-<script>
- function goback(){
-  history.go(-1);
- }
-
- //    layui.use('form', function(){
-
- //          var form = layui.form;
-
- //          form.render();
-
- //    });
-
-
-
-
-
-
- //layui日期组件
-
- layui.use('laydate', function(){
-
-  var laydate = layui.laydate;
-
-
-
-
-
-
-
-  laydate.render({
-
-   elem: '#test66' //指定元素
-
-   ,type: 'date'
-
-  });
-  laydate.render({
-
-   elem: '#test5' //指定元素
-
-   ,type: 'date'
-
-  });
-  laydate.render({
-
-   elem: '#test3' //指定元素
-
-   ,type: 'date'
-
-  });
-  laydate.render({
-
-   elem: '#test15' //指定元素
-   ,type: 'date'
-
-  });
-  laydate.render({
-
-   elem: '#test6' //指定元素
-
-   ,type: 'date'
-
-  });
-
-  laydate.render({
-
-   elem: '#test7' //指定元素
-
-   ,type: 'date'
-
-  });
-
-  laydate.render({
-
-   elem: '#test4' //指定元素
-
-  });
-
- });
-
-
-
- /*layui联动组件*/
-
- layui.use(['form','element','jquery','layer'],function(){
-
-  var layer = layui.layer, $ = layui.jquery;
-
-  var form = layui.form;
-
-  form.on('select(pidshow)', function(data){
-
-
-   showData(data.value);
-
-  });
-
- });
-
-
-
-
-
-
-
-</script>
-
-
-
-
-
-<!--layer结束-->
-
-<script>
-
- //FFC125 color:#878686
-
- var test = window.location.href;
-
- arr=test.split("/");
-
- len = arr.length;
-
- div_class = arr[len-2];
-
- if(div_class == 'id'){
-
-  div_class = arr[len-4];
-
- }
-
-
-
- $('#'+ div_class + ' i').css("color","#FFC125");
-
- $('#'+ div_class + ' ').css("background","#1686ef");
-
- $('#'+div_class+' a').css("color","#fff");
-
-
-
-
-
- $('.con li').each(function() {
-
-  $('.con li').attr("class","");
-
- });
-
-
-
-
-
- /*菜单颜色变化*/
-
- $(function(){
-
-  $("#menudiv li").hover(function(){
-
-   $(this).children('i').css("color","#FFC125");
-
-  },function(){
-
-
-
-   $(this).children('i').css("color", "rgba(255, 255, 255, 0.7)");
-
-   $('#'+ div_class + ' i').css("color","#FFC125");
-
-  })
-
- })
-
-
-
-
-
-
-
- //提示
-
- function myalert(info,link){
-
-  layer.confirm(info, {
-
-   btn: ['确定'] //按钮
-
-  }, function(){
-
-   if(link == ''){
-
-    layer.msg({icon: 1});
-
-    return false;
-
-   }else if(link == '1'){
-
-    location.href='';
-
-   }else{
-
-    location.href=link;
-
-   }
-
-  });
-
- }
-
-
-
- //删除
-
-
-
- function shanchu(id){
-
-  layer.confirm('确定要删除吗？', {
-
-   btn: ['确定','取消'] //按钮
-
-  }, function(){
-
-   params = {};
-
-   params.id = id;
-
-   var url = '__CONTROLLER__/del';
-
-   $.post(url, params, function(d){
-
-    if(d.error == ""){
-
-     myalert("删除成功",1);
-
-    }else{
-
-     myalert("删除失败",'');
-
-    }
-
-   }, 'json');
-
-  },function(){
-
-   window.location.reload();
-
-  });
-
-
-
- }
-
-</script>
 
 
 

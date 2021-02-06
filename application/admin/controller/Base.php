@@ -22,5 +22,15 @@ class Base extends  Controller
             $this->redirect("admin/Index/login");
         }
         $this->morenPic ='/Admin/images/moren.png';
+        $this->menu();
+    }
+
+    public function menu()
+    {
+        $adminid = session('userid');
+        $user = db('admin')->where(array('id'=>$adminid))->find();
+        $auth = db('author')->where(array('id'=>$user['authid']))->find();
+        $menu = changeArr($auth['functioninfo']);
+        $this->assign('menu',$menu);
     }
 }

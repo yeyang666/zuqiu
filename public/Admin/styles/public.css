@@ -39,8 +39,9 @@ img {
 }
 a {
  text-decoration: none;
- color: #626262;
+ color:rgba(255, 255, 255, 0.7);text-decoration:none
 }
+
 a:hover {
  text-decoration: none;
 }
@@ -653,14 +654,14 @@ color:#fff;
  z-index: 1;
 }
 #maskBox .maskBg i {
- background: url(../images/icon_picture_big.png) no-repeat;
+ background: url() no-repeat;
 }
 #maskBox #mask {
  position: absolute;
  z-index: 2;
 }
 #maskBox #mask i {
- background: url(../images/icon_picture_big.png) no-repeat left bottom;
+ background: url() no-repeat left bottom;
 }
 #maskBox #success {
  background: #60BBFF;
@@ -844,7 +845,7 @@ color:#fff;
  text-align:right;
 }
 #order .btnShow {
- background: #FFFFFF url(../images/icon_edit_blue.png) no-repeat;
+ background: #FFFFFF url() no-repeat;
  border: none;
  width:16px;
  height:16px;
@@ -854,7 +855,7 @@ color:#fff;
  margin-left:10px;
 }
 #order .btnHide {
- background: #FFFFFF url(../images/icon_no.png) no-repeat;
+ background: #FFFFFF url() no-repeat;
  border: none;
  width:14px;
  height:14px;
@@ -869,7 +870,7 @@ color:#fff;
 /* 网站管理员
 ----------------------------------------------- */
 #manager .cloudAccount {
- background: url(../images/icon_cloud_account.png) no-repeat center top;
+ background: url() no-repeat center top;
  text-align:center;
  padding-top:80px;
  margin-top:150px;
@@ -1355,4 +1356,169 @@ color:#fff;
 #footer ul {
  text-align: center;
  padding: 15px 0;
+}
+
+::-webkit-scrollbar {
+
+ width: 6px;
+
+ height: 6px;
+
+}
+
+::-webkit-scrollbar-thumb {
+
+ border-radius: 3px;
+
+ -moz-border-radius: 3px;
+
+ -webkit-border-radius: 3px;
+
+ background-color: #c3c3c3;
+
+}
+
+::-webkit-scrollbar-track {
+
+ background-color: transparent;
+
+}
+
+
+
+
+
+
+
+
+.index_dl1{
+ display:none;
+}
+
+
+
+
+em{
+
+ margin-top:5px
+
+}
+
+td{
+
+ text-align: center;
+
+ font-size:14px;
+
+}
+
+#search{
+
+ border:1px solid #00a2d4;padding:5px;width:250px;
+
+}
+
+.layui-form-selected dl{
+
+ z-index:9999;
+
+}
+
+#sousuo{
+
+ margin-left:5px;padding:5px 15px;text-align:center;cursor:pointer;color:#fff;background: #0065B0;
+
+}
+
+input{
+
+ float: left;
+
+ padding:10px;
+
+ margin-top:10px;
+
+ border: 1px solid #ccc;
+
+}
+
+.div_radio{
+
+ margin:0;display:none;
+
+}
+
+
+
+
+
+.layui-btn-xs{
+
+ height: 32px !important;
+
+ line-height: 22px;
+
+ padding: 5px 10px !important;
+
+}
+
+table
+
+{
+
+ border-collapse:separate !important;
+
+}
+
+.layui-form-checked{
+
+ float:left;
+
+}
+
+.layui-form-checkbox[lay-skin=primary]{
+
+ float:left;
+
+}
+
+.actionBtn{
+
+ margin-right:20px;
+
+}
+
+.icon_class{
+
+ padding:0 15px;float:left;margin-top:13px;font-size:18px;color:rgba(255, 255, 255, 0.7)
+
+}
+
+.icon_class:hover{
+
+ padding:0 15px;float:left;margin-top:13px;font-size:18px;color:#FFC125;
+
+}
+
+
+
+#dcHead{
+
+ position:fixed;
+
+ top:0;
+
+ left:0;
+
+ background:#fff;
+
+}
+#dcLeft{
+ height:100%; overflow:hidden; position:fixed;overflow-y:auto;top:0;background: #24303c;left:0
+}
+.noRight{
+  margin-right:30px;
+}
+.layui-index-menu{
+ width: 30px; height: 30px; float: right; margin-top: 15px; background: url() no-repeat; background-size: 100%;
 }
