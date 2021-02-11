@@ -7,64 +7,60 @@
     <meta http-equiv="Expires" content="0">
     <title>后台登录</title>
     <link href="__PUBLIC__/Admin/styles/login.css" type="text/css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/js/viewui/iview.css">
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/viewui/vue.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/js/viewui/iview.min.js"></script>
     <script type="text/javascript" src="__PUBLIC__/Admin/js/jquery-1.8.2.min.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/Admin/js/jquery.form.js"></script>
-    <link rel="stylesheet" href="__PUBLIC__/Admin/layui/css/layui.css">
-    <script src="__PUBLIC__/Admin/layui/layui.js"></script>
     <script src="__PUBLIC__/Admin/js/common.js"></script>
 </head>
 <body>
 
-<div class="login">
+<div class="login" id="app">
     <div class="message">管理登录</div>
     <div id="darkbannerwrap"></div>
-    <form id="form" action="{:url('adminApi/index/login')}" method="post">
         <input name="action" value="login" type="hidden">
-        <input id="username" name="username" placeholder="用户名" required="" type="text">
+        <input id="username" v-model="username" placeholder="用户名" required="" type="text">
         <div class="hr15"></div>
-        <input id="password" name="password" placeholder="密码" required="" type="password">
+        <input id="password"  v-model="password" placeholder="密码" required="" type="password">
         <div class="hr15"></div>
-        <input value="登录" style="width:100%;" type="submit">
+        <input value="登录" style="width:100%;" @click="submitForm" type="submit">
         <div class="hr20"></div>
-    </form>
-
 </div>
 </body>
 </html>
 
 <script>
-    var loading=0;
-    $(function(){
-        if(loading){
-            return false;
+    new Vue({
+        el: '#app',
+        data: {
+            username:"",
+            password:"",
+        },
+        methods: {
+            submitForm: function(){
+                var that=this;
+                var param = {};
+                param.username = that.username;
+                param.password = that.password;
+                $.ajax({
+                    url:"{:url('adminApi/index/login')}",
+                    type: 'post',
+                    dataType: 'json',
+                    data: param,
+                    success: function(data){
+                        if(data.code == 1){
+                            location.href="{:url('admin/user/index')}";
+                        }else{
+                            that.$Message.info(data.msg);
+                            return;
+                        }
+                    }
+                })
+            },
+        },
+        mounted() {
+
         }
-        loading=1;
-        $('#form').ajaxForm({
-            beforeSubmit:  checkForm,// pre-submit callback
-            success:       complete,// post-submit callback
-            dataType: 'json'
-        });
-
-        function checkForm(){
-            if(!$.trim ( $('#username').val() )){
-                alert('请输入用户名');
-                return false;
-            }
-
-            if(!$.trim ( $('#password').val() )){
-                alert('请输入密码');
-                return false;
-            }
-
-        }
-        function complete(d){
-            if (d.code == 1){
-                window.location.href="{:url('user/index')}";
-            }else{
-                layer.alert(d.msg);
-                loading=0;
-            }
-        }
-
-    });
+    })
 </script>

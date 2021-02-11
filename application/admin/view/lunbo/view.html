@@ -1,12 +1,18 @@
 {layout name="Common/index" /}
 <div id="dcMain">
     <div class="mainBox imgModule">
-        <h3><span class="actionBtn" style="margin-left: 10px; cursor: pointer;" onclick="goback();">返回</span>编辑文章</h3>
+        <h3><span class="actionBtn" style="margin-left: 10px; cursor: pointer;" onclick="goback();">返回</span>编辑轮播</h3>
             <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
                 <tr>
-                    <td class="label" align="right">文章名称：</td>
+                    <td class="label" align="right">轮播名称：</td>
                     <td>
                         <input type="text"  name="title"  v-model="title"  size="50" class="title" value=""/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label" align="right">跳转链接：</td>
+                    <td>
+                        <input type="text"  name="link"  v-model="link"  size="50"  value=""/>
                     </td>
                 </tr>
                 <tr>
@@ -22,10 +28,10 @@
                             上传图片<input id="thumbnail" type="file" name="thumbnail" class="picstyle" @click="uploadimg"/></a>
                     </td>
                 </tr>
-                <tr class="article-class">
-                    <td class="label" align="right">文章内容：</td>
+                <tr>
+                    <td class="label" align="right">排序：</td>
                     <td>
-                        <textarea id="editor" name="info" v-model="info" class="article" style="height:400px;"></textarea>
+                        <input type="number"  name="sort"  v-model="sort"  size="5"  value=""/>
                     </td>
                 </tr>
                 <tr>
@@ -49,11 +55,13 @@
     new Vue({
         el: '#dcMain',
         data: {
-            title: "",
+            title:"",
             pic:moren,
             info:"",
             id:id,
-            editor:""
+            editor:"",
+            sort:"",
+            link:""
         },
         methods: {
             submitForm: function(){
@@ -65,15 +73,16 @@
                 var param = {};
                 param.title = that.title;
                 param.pic = that.pic;
-                param.info = that.getUEContent();
                 param.id = that.id;
+                param.link = that.link;
+                param.sort = that.sort;
                 $.ajax({
-                    url:"{:url('adminApi/article/uploadServer')}",
+                    url:"{:url('adminApi/lunbo/uploadServer')}",
                     type: 'post',
                     dataType: 'json',
                     data: param,
                     success: function(data){
-                        location.href="{:url('admin/article/index')}";
+                        location.href="{:url('admin/lunbo/index')}";
                     }
                 })
             },
@@ -90,7 +99,7 @@
                             {
                                 if(data.code != 1)
                                 {
-                                    that.$Message.info(data.mag);
+                                    this.$Message.info(data.mag);
                                     return;
                                 }else
                                 {
@@ -107,34 +116,27 @@
                     return false;
                 });
             },
-            getUEContent: function(){
-                var that=this;
-                return that.editor.getContent();
-            },
             assign:function(id){
                 var that=this;
                 var param = {};
                 param.id = id;
                 $.ajax({
-                    url:"{:url('adminApi/article/getInfo')}",
+                    url:"{:url('adminApi/lunbo/getInfo')}",
                     type: 'post',
                     dataType: 'json',
                     data: param,
                     success: function(data){
                         data = JSON.parse(data['msg']);
-                        console.log(data.info)
                         that.title = data.title;
                         that.pic = data.pic;
-                        that.editor.addListener("ready", function () {
-                            that.editor.setContent(data.info);
-                        });
+                        that.link = data.link;
+                        that.sort = data.sort;
                     }
                 })
             }
         },
         mounted() {
             var that=this;
-            that.editor = UE.getEditor('editor',{autoHeightEnabled:false});
             if(that.id){
                 that.assign(that.id);
             }

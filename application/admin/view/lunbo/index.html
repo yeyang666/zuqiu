@@ -2,15 +2,12 @@
 
 <div id="dcMain"> <!-- 当前位置 -->
     <div class="mainBox imgModule">
-        <h3><a href="{:url('admin/article/view')}"><button class="layui-btn layui-btn-normal" style="float:right;"><i class="layui-icon">&#xe654;</i>新增</button></a>文章列表</h3>
-<!--        <Date-Picker type="year" name="year" class="bh-datepicker" -->
-<!--                     placement="bottom-start">-->
-<!--        </Date-Picker>-->
+        <h3><a href="{:url('admin/lunbo/view')}"><button class="layui-btn layui-btn-normal" style="float:right;"><i class="layui-icon">&#xe654;</i>新增</button></a>轮播图列表</h3>
         <table width="100%" border="0" cellpadding="10" cellspacing="0" class="tableBasic">
             <tr>
                 <th width="50px">id</th>
-                <th >文章标题</th>
-                <th>创建时间</th>
+                <th>轮播图标题</th>
+                <th>图片</th>
                 <th width="15%">修改</th>
             </tr>
             {volist name="list" id="vo"}
@@ -22,9 +19,9 @@
                         {$vo.title}
                     </td>
                     <td>
-                        {$vo.createtime}
+                       <img src="{$vo.pic}" style="width:120px;">
                     </td>
-                    <td><a href="{:url('admin/article/view',['id'=>$vo['id']])}" class="layui-btn layui-btn-xs"><i class="layui-icon">&#xe642;</i>修改</a>
+                    <td><a href="{:url('admin/lunbo/view',['id'=>$vo['id']])}" class="layui-btn layui-btn-xs"><i class="layui-icon">&#xe642;</i>修改</a>
                         <a href="javascript:void(0)" @click="shanchu({$vo.id})" class="layui-btn layui-btn-danger layui-btn-xs"><i class="layui-icon">&#xe640;</i>删除</a>
                     </td>
                 </tr>
@@ -49,7 +46,7 @@
                 var param = {};
                 param.id = id;
                 $.ajax({
-                    url:"{:url('adminApi/article/deleteServer')}",
+                    url:"{:url('adminApi/lunbo/deleteServer')}",
                     type: 'post',
                     dataType: 'json',
                     data: param,

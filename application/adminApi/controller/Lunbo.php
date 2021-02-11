@@ -12,17 +12,17 @@ namespace app\adminApi\controller;
 
 use think\facade\Request;
 
-class Article
+class Lunbo
 {
     public function uploadServer()
     {
         $data = input('post.');
         if($data['id']){
-            db("article")->where([
+            db("lunbo")->where([
                 'id' => $data['id']
             ])->update($data);
         }else{
-            db("article")->insert($data);
+            db("lunbo")->insert($data);
         }
         ajax_success();
     }
@@ -31,7 +31,7 @@ class Article
     {
         $info = "";
         if(Request::param("id")){
-            $info = db("article")->where([
+            $info = db("lunbo")->where([
                 'id'=>Request::param("id")
             ])->find();
         }
@@ -40,7 +40,7 @@ class Article
     public function deleteServer()
     {
         $id = input('id');
-        db("article")->where([
+        db("lunbo")->where([
             'id' => $id
         ])->delete();
     }

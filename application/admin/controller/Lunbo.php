@@ -2,19 +2,21 @@
 /**
  * Created by PhpStorm.
  * user: xieyang
- * Date: 2021/2/3
- * Time: 下午10:05
+ * Date: 2021/2/11
+ * Time: 下午9:39
  * Author: 叶阳
  */
 
 namespace app\admin\controller;
 
+
 use think\facade\Request;
-class Article extends Base
+
+class Lunbo extends Base
 {
     public function index()
     {
-        $list = db('article')->order('id')->paginate(config('app.pagesize'));
+        $list = db('lunbo')->order('id')->paginate(config('app.pagesize'));
         $show = $list->render();
         $this->assign('page',$show);
         $this->assign('list',$list);
@@ -30,6 +32,4 @@ class Article extends Base
         $this->assign('moren',$moren);
         return $this->fetch();
     }
-
-
 }

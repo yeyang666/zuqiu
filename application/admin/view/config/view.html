@@ -1,0 +1,120 @@
+{layout name="Common/index" /}
+<div id="dcMain">
+    <div class="mainBox imgModule">
+        <h3><span class="actionBtn" style="margin-left: 10px; cursor: pointer;" onclick="goback();">返回</span>设置</h3>
+            <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+                <tr>
+                    <td class="label" align="right">微信appid：</td>
+                    <td>
+                        <input type="text"  v-model="appid"  size="50" value=""/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label" align="right">微信secret：</td>
+                    <td>
+                        <input type="text"  v-model="appsecret"  size="50"  value=""/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label" align="right">商户mch_id：</td>
+                    <td>
+                        <input type="text"  v-model="mch_id"  size="50"  value=""/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label" align="right">商户apisecret：</td>
+                    <td>
+                        <input type="text"  v-model="apisecret"  size="50"  value=""/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label" align="right">商户SSLCERT：</td>
+                    <td>
+                         <textarea  v-model="sslcert" class="textarea-class"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label" align="right">商户SSLKEY：</td>
+                    <td>
+                        <textarea  v-model="sslkey" class="textarea-class"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="131"></td>
+                    <td>
+                        <input type="hidden" value="{{id}}" name="id" v-model="id">
+                        <input name="button" class="btn sub" type="submit" value="提交" @click="submitForm" />
+                    </td>
+                </tr>
+            </table>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <div class="line"></div>
+    </div>
+    <div class="clear"></div>
+</div>
+<script>
+    new Vue({
+        el: '#dcMain',
+        data: {
+            id:1,
+            appid:"",
+            appsecret:"",
+            mch_id:"",
+            apisecret:"",
+            sslkey:"",
+            sslcert:""
+        },
+        methods: {
+            submitForm: function(){
+                var that=this;
+                var param = {};
+                param.appid = that.appid;
+                param.appsecret = that.appsecret;
+                param.id = that.id;
+                param.mch_id = that.mch_id;
+                param.apisecret = that.apisecret;
+                param.sslkey = that.sslkey;
+                param.sslcert = that.sslcert;
+                $.ajax({
+                    url:"{:url('adminApi/config/uploadServer')}",
+                    type: 'post',
+                    dataType: 'json',
+                    data: param,
+                    success: function(){
+                        location.href="";
+                    }
+                })
+            },
+            assign:function(id){
+                var that=this;
+                var param = {};
+                param.id = id;
+                $.ajax({
+                    url:"{:url('adminApi/config/getInfo')}",
+                    type: 'post',
+                    dataType: 'json',
+                    data: param,
+                    success: function(data){
+                        data = JSON.parse(data['msg']);
+                        that.appid = data.appid;
+                        that.appsecret = data.appsecret;
+                        that.mch_id = data.mch_id;
+                        that.apisecret = data.apisecret;
+                        that.sslkey = data.sslkey;
+                        that.sslcert = data.sslcert;
+                    }
+                })
+            }
+        },
+        mounted() {
+            var that=this;
+            if(that.id){
+                that.assign(that.id);
+            }
+        }
+    })
+</script>
+</body>
+</html>
