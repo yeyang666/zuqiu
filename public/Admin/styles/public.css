@@ -3,7 +3,7 @@
 /* 全局通用
 ----------------------------------------------- */
 body {
-
+ background-color: #EEEEEE;
  font-family: Microsoft Yahei, \5FAE\8F6F\96C5\9ED1, \5B8B\4F53, Arial, Verdana, sans-serif;
  font-size: 12px;
  color: #333;
@@ -39,9 +39,8 @@ img {
 }
 a {
  text-decoration: none;
- color:rgba(255, 255, 255, 0.7);text-decoration:none
+ color: #626262;
 }
-
 a:hover {
  text-decoration: none;
 }
@@ -117,8 +116,9 @@ p.cue {
  width: 100%;
 }
 #dcLeft {
+ height:100%; overflow:hidden; position:fixed;overflow-y:auto;top:0;background: #24303c;
  float: left;
- width: 179px;
+ width: 185px;
 }
 #dcMain {
  background-color: #FFFFFF;
@@ -252,6 +252,7 @@ select {
 .tableBasic th {
  background-color: #EEEEEE;
  height: 16px;
+ padding:10px;
 }
 .tableBasic .child {
  background-color: #FFFFFF;
@@ -465,10 +466,11 @@ color:#fff;
 #menu li em {
  float: left;
  display: block;
- width: 120px;
+ width: 130px;
  height: 38px;
  cursor: pointer;
  font-size:15px;
+ color:rgba(255, 255, 255, 0.7);
 }
 
 #menu li em:hover{
@@ -654,14 +656,14 @@ color:#fff;
  z-index: 1;
 }
 #maskBox .maskBg i {
- background: url() no-repeat;
+ background: url(../images/icon_picture_big.png) no-repeat;
 }
 #maskBox #mask {
  position: absolute;
  z-index: 2;
 }
 #maskBox #mask i {
- background: url() no-repeat left bottom;
+ background: url(../images/icon_picture_big.png) no-repeat left bottom;
 }
 #maskBox #success {
  background: #60BBFF;
@@ -845,7 +847,7 @@ color:#fff;
  text-align:right;
 }
 #order .btnShow {
- background: #FFFFFF url() no-repeat;
+ background: #FFFFFF url(../images/icon_edit_blue.png) no-repeat;
  border: none;
  width:16px;
  height:16px;
@@ -855,7 +857,7 @@ color:#fff;
  margin-left:10px;
 }
 #order .btnHide {
- background: #FFFFFF url() no-repeat;
+ background: #FFFFFF url(../images/icon_no.png) no-repeat;
  border: none;
  width:14px;
  height:14px;
@@ -870,7 +872,7 @@ color:#fff;
 /* 网站管理员
 ----------------------------------------------- */
 #manager .cloudAccount {
- background: url() no-repeat center top;
+ background: url(../images/icon_cloud_account.png) no-repeat center top;
  text-align:center;
  padding-top:80px;
  margin-top:150px;
@@ -1357,7 +1359,6 @@ color:#fff;
  text-align: center;
  padding: 15px 0;
 }
-
 ::-webkit-scrollbar {
 
  width: 6px;
@@ -1409,6 +1410,8 @@ td{
  text-align: center;
 
  font-size:14px;
+
+ padding:10px;
 
 }
 
@@ -1490,7 +1493,7 @@ table
 
 .icon_class{
 
- padding:0 15px;float:left;margin-top:13px;font-size:18px;color:rgba(255, 255, 255, 0.7)
+ padding:0 15px;float:left;margin-top:8px;font-size:18px;color:rgba(255, 255, 255, 0.7)
 
 }
 
@@ -1513,12 +1516,24 @@ table
  background:#fff;
 
 }
-#dcLeft{
- height:100%; overflow:hidden; position:fixed;overflow-y:auto;top:0;background: #24303c;left:0
+.ivu-input-prefix i, .ivu-input-suffix i{
+ line-height: 50px;
 }
-.noRight{
-  margin-right:30px;
+.picstyle{
+ position: absolute; right: 0px; top: 0px; font-family: Arial; font-size: 118px; margin: 0px; padding: 0px; cursor: pointer; opacity: 0
 }
-.layui-index-menu{
- width: 30px; height: 30px; float: right; margin-top: 15px; background: url() no-repeat; background-size: 100%;
+.picbtn{
+ position: relative; overflow: hidden; direction: ltr;float:left;
+}
+.picmoren{
+ width:150px;height:130px;float:left;
+}
+.article{
+ width:700px;height:400px;margin-top:-100px;
+}
+.article-class{
+ height:530px
+}
+.textarea-class{
+ float: left;border: 1px solid #cccccc;width:500px;height:200px;
 }
